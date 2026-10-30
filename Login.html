@@ -1,92 +1,143 @@
-<!DOCTYPE html> 
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
-    <title>Expense Tracker Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            font-family: Arial;
-            background-color: #dae2ef;
-            margin: 0;
-            padding: 0;
-            justify-content: center;
-            display: flex;
-            align-items: center;
-            height: 100vh;
-        } 
+    <title>Login - Personal Expense Tracker</title>
 
-        .login-card{
-            background-color: white; 
-            padding: 50px; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
-            width: 305px; 
-            text-align: center; 
-        }
-
-        h2 {
-            margin-bottom: 10px;
-            color: #333;
-        }
-
-        .input-group{
-            margin-bottom: 15px;
-            text-align: center;
-                
-            
-        }
-        input {
-            width: 75%; 
-            padding: 6px;
-            box-sizing: border-box;
-        }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            font-size: 13px;
-            color: #555;
-        }
-
-        .login-btn{
-            background-color: #28a745;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-            width: 100%;
-            }
-
-
-    </style>
-
+    <link rel="stylesheet" href="../style.css">
 </head>
 
+<body id="top">
 
+    <header>
+        <h1>Personal Expense Tracker</h1>
+        <p>Track your income and expenses easily.</p>
+    </header>
 
-<body>
-<div class="login-card">
-    <h2>Login</h2>
-    <form action="index.html">
-        <div class="input-group">
-            <label for="username">Username / Email:</label>
-            <input type="text" placeholder="Username or Email" required>
-        </div>
-        <div class="input-group">
-            <label for="password">Password:</label>
-            <input type="password" placeholder="Password" required>
-        </div>
-        <button type="submit" class="login-btn">Login</button>
-        
-        <!--go to sign up page-->
-        <div style="margin-top: 15px; font-size: 13px; color: #666;">
-            Don't have an account? <a href="SignUp.html" style="color: #007bff; text-decoration: none;">Sign Up</a>
-        </div>
-    </form>
-</div>
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html">Login</a>
+        <a href="SignUp.html">Sign Up</a>
+    </nav>
 
+    <main>
+
+        <!-- Login Form -->
+        <section class="box">
+
+            <h2>Login</h2>
+
+            <p>Enter your information to continue.</p>
+
+            <form id="loginForm">
+
+                <label for="email">Email:</label>
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email"
+                    required
+                >
+
+                <label for="password">Password:</label>
+                <input
+                    type="password"
+                    id="password"
+                    placeholder="Enter your password"
+                    minlength="6"
+                    required
+                >
+
+                <button type="submit">Login</button>
+
+            </form>
+
+            <p>
+                Don't have an account?
+                <a href="SignUp.html">Sign Up</a>
+            </p>
+
+        </section>
+
+        <!-- Project Image -->
+        <section class="box">
+
+            <h2>About Our Project</h2>
+
+            <p>
+                Click on the image to learn more
+                about our project.
+            </p>
+
+            <img
+                src="../images/personal-expense-tracker-info-banner.png"
+                alt="Personal Expense Tracker"
+                class="info-image"
+                id="loginImage"
+                width="400"
+                usemap="#loginMap"
+            >
+
+            <map name="loginMap">
+                <area
+                    id="loginArea"
+                    shape="rect"
+                    coords="0,0,400,250"
+                    href="about.html"
+                    alt="Go to About Us"
+                >
+            </map>
+
+        </section>
+
+        <p>
+            <a href="#top">Back to Top</a>
+        </p>
+
+    </main>
+
+    <footer>
+        <p>Personal Expense Tracker | CPIS-358</p>
+    </footer>
+
+    <!-- Embedded JavaScript -->
+    <script>
+
+        // Login form
+        document.getElementById("loginForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            alert("Login is a demo for this project.");
+        });
+
+        // Image Mapping
+        var loginImage = document.getElementById("loginImage");
+        var loginArea = document.getElementById("loginArea");
+
+        function updateLoginMap() {
+            if (loginImage.naturalWidth === 0) {
+                return;
+            }
+
+            loginArea.coords = "0,0," +
+                loginImage.clientWidth + "," +
+                loginImage.clientHeight;
+        }
+
+        loginImage.addEventListener("load", updateLoginMap);
+        window.addEventListener("resize", updateLoginMap);
+
+        if (loginImage.complete) {
+            updateLoginMap();
+        }
+
+    </script>
 
 </body>
-
 </html>

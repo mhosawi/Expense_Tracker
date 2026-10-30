@@ -1,15 +1,142 @@
 <!DOCTYPE html>
-<html>
-    <title>Expense Tracker</title>
-    
-    <head>
-        
-    
-    </head>
-    
-    <body>
-    
-    
-    
-    </body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Personal Expense Tracker</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body id="top">
+
+    <header>
+        <h1>Personal Expense Tracker</h1>
+        <p>Track your income and expenses easily.</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Home</a>
+        <a href="pages/dashboard.html">Dashboard</a>
+        <a href="pages/transactions.html">Transactions</a>
+        <a href="pages/about.html">About Us</a>
+        <a href="pages/login.html">Login</a>
+        <a href="pages/SignUp.html">Sign Up</a>
+    </nav>
+
+    <main>
+
+        <section class="box">
+            <h2>Welcome!</h2>
+
+            <p>
+                This website helps you track your income
+                and expenses in a simple way.
+            </p>
+
+            <a href="pages/dashboard.html" class="button">
+                Go to Dashboard
+            </a>
+        </section>
+
+        <section class="box">
+            <h2>Website Features</h2>
+
+            <ul>
+                <li>Add income and expenses</li>
+                <li>View your available balance</li>
+                <li>Check recent transactions</li>
+                <li>Manage your daily spending</li>
+            </ul>
+
+            <a href="pages/transactions.html" class="button">
+                Add Transaction
+            </a>
+        </section>
+
+        <section class="box">
+            <h2>Why Use It?</h2>
+
+            <p>
+                Our website helps users organize their
+                daily spending and understand where
+                their money goes.
+            </p>
+
+            <p>
+                It also shows total income, expenses,
+                and available balance in one place.
+            </p>
+        </section>
+
+        <section class="box">
+            <h2>About Our Project</h2>
+
+            <p>
+                Click on the image below to learn
+                more about our project.
+            </p>
+
+            <img
+                src="images/personal-expense-tracker-about-banner.png"
+                alt="Personal Expense Tracker project"
+                class="project-image"
+                id="projectImage"
+                width="400"
+                usemap="#expenseMap"
+            >
+
+            <map name="expenseMap">
+                <area
+                    id="aboutArea"
+                    shape="rect"
+                    coords="0,0,400,250"
+                    href="pages/about.html"
+                    alt="Go to About Us"
+                >
+            </map>
+
+            <p>
+                <a href="pages/about.html" class="button">
+                    Learn More
+                </a>
+            </p>
+        </section>
+
+        <p>
+            <a href="#top">Back to Top</a>
+        </p>
+
+    </main>
+
+    <footer>
+        <p>Personal Expense Tracker | CPIS-358</p>
+    </footer>
+
+    <!-- Image Mapping JavaScript -->
+    <script>
+        var image = document.getElementById("projectImage");
+        var area = document.getElementById("aboutArea");
+
+        function updateMap() {
+            if (image.naturalWidth === 0) {
+                return;
+            }
+
+            area.coords = "0,0," +
+                image.clientWidth + "," +
+                image.clientHeight;
+        }
+
+        image.addEventListener("load", updateMap);
+        window.addEventListener("resize", updateMap);
+
+        if (image.complete) {
+            updateMap();
+        }
+    </script>
+
+</body>
 </html>
