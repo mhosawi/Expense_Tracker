@@ -1,0 +1,197 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>About Us - Personal Expense Tracker</title>
+
+    <link rel="stylesheet" href="../style.css">
+
+    <style>
+        .team {
+            background-color: #e3eee8;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .team p {
+            margin: 10px 0;
+        }
+    </style>
+</head>
+
+<body id="top">
+
+    <header>
+        <h1>Personal Expense Tracker</h1>
+        <p>Track your income and expenses easily.</p>
+    </header>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html">Login</a>
+        <a href="SignUp.html">Sign Up</a>
+    </nav>
+
+    <main>
+
+        <!-- About Our Project -->
+        <section class="box" id="about-project">
+
+            <h2>About Our Project</h2>
+
+            <p>
+                Personal Expense Tracker is a simple website
+                that helps users record their income and expenses.
+                It was created for our CPIS-358 course.
+            </p>
+
+            <p>
+                The website allows users to add transactions,
+                check their balance, and see their spending.
+            </p>
+
+            <a href="#features" class="button">
+                Project Features
+            </a>
+
+        </section>
+
+        <!-- Project Features -->
+        <section class="box" id="features">
+
+            <h2>Project Features</h2>
+
+            <ul>
+                <li>Add income and expenses</li>
+                <li>Choose a category for each transaction</li>
+                <li>Delete transactions</li>
+                <li>Save transactions in the browser</li>
+                <li>View your balance and recent transactions</li>
+            </ul>
+
+            <a href="transactions.html" class="button">
+                Go to Transactions
+            </a>
+
+        </section>
+
+        <!-- Dashboard Features -->
+        <section class="box">
+
+            <h2>Dashboard Features</h2>
+
+            <p>
+                The Dashboard shows a simple summary
+                of your financial information.
+            </p>
+
+            <ul>
+                <li>Available Balance</li>
+                <li>Total Income</li>
+                <li>Total Expenses</li>
+                <li>Last 5 Transactions</li>
+            </ul>
+
+            <a href="dashboard.html" class="button">
+                Go to Dashboard
+            </a>
+
+        </section>
+
+        <!-- Our Goal -->
+        <article class="box">
+
+            <h2>Our Goal</h2>
+
+            <p>
+                Our goal is to help users manage their
+                money in an easy and organized way.
+            </p>
+
+        </article>
+
+        <!-- Development Team -->
+        <section class="box">
+
+            <h2>Development Team</h2>
+
+            <div class="team">
+                <p><strong>Ali Alghanimy</strong></p>
+                <p><strong>Mazin hosawi</strong></p>
+            </div>
+
+        </section>
+
+        <!-- Project Image -->
+        <section class="box">
+
+            <h2>Project Information</h2>
+
+            <p>
+                Click on the image to read
+                about our project.
+            </p>
+
+            <img
+                src="../images/personal-expense-tracker-info-banner.png"
+                alt="Personal Expense Tracker"
+                class="info-image"
+                id="aboutImage"
+                width="400"
+                usemap="#aboutMap"
+            >
+
+            <map name="aboutMap">
+                <area
+                    id="aboutArea"
+                    shape="rect"
+                    coords="0,0,400,250"
+                    href="#about-project"
+                    alt="Go to About Our Project"
+                >
+            </map>
+
+        </section>
+
+        <p>
+            <a href="#top">Back to Top</a>
+        </p>
+
+    </main>
+
+    <footer>
+        <p>Personal Expense Tracker | CPIS-358</p>
+    </footer>
+
+    <!-- Image Mapping JavaScript -->
+    <script>
+        var aboutImage = document.getElementById("aboutImage");
+        var aboutArea = document.getElementById("aboutArea");
+
+        function updateAboutMap() {
+            if (aboutImage.naturalWidth === 0) {
+                return;
+            }
+
+            aboutArea.coords = "0,0," +
+                aboutImage.clientWidth + "," +
+                aboutImage.clientHeight;
+        }
+
+        aboutImage.addEventListener("load", updateAboutMap);
+        window.addEventListener("resize", updateAboutMap);
+
+        if (aboutImage.complete) {
+            updateAboutMap();
+        }
+    </script>
+
+</body>
+</html>

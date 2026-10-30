@@ -1,0 +1,173 @@
+
+/* General Style */
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f2f5f3;
+    color: #333;
+}
+
+/* Header */
+header {
+    background-color: #176b55;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header h1 {
+    margin: 0;
+}
+
+header p {
+    margin-bottom: 0;
+}
+
+/* Navigation */
+nav {
+    background-color: #124d3e;
+    padding: 15px;
+    text-align: center;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 10px;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+/* Main Content */
+main {
+    width: 85%;
+    max-width: 900px;
+    margin: 30px auto;
+}
+
+/* Sections */
+.box {
+    background-color: white;
+    padding: 25px;
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px #ddd;
+}
+
+h2 {
+    color: #176b55;
+}
+
+/* Lists */
+ul {
+    line-height: 1.8;
+}
+
+/* Buttons */
+.button,
+button {
+    display: inline-block;
+    background-color: #176b55;
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.button:hover,
+button:hover {
+    background-color: #124d3e;
+}
+
+/* Forms */
+input,
+select {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 15px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+input:focus,
+select:focus {
+    border-color: #176b55;
+    outline: 1px solid #176b55;
+}
+
+/* Tables */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th,
+td {
+    padding: 12px;
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #e3eee8;
+}
+
+/* Images */
+.project-image,
+.info-image {
+    display: block;
+    width: 400px;
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+.info-image {
+    margin: 15px auto;
+}
+
+.project-image {
+    margin-top: 15px;
+}
+
+/* Footer */
+footer {
+    background-color: #124d3e;
+    color: white;
+    text-align: center;
+    padding: 15px;
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+
+    main {
+        width: 92%;
+    }
+
+    nav a {
+        display: inline-block;
+        margin: 6px;
+    }
+
+    .box {
+        padding: 18px;
+    }
+
+    th,
+    td {
+        padding: 8px;
+    }
+}

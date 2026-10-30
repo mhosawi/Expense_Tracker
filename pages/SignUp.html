@@ -1,0 +1,132 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Personal Expense Tracker</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body id="top">
+
+    <header>
+        <h1>Personal Expense Tracker</h1>
+        <p>Track your income and expenses easily.</p>
+    </header>
+
+    <nav>
+        <a href="../index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="transactions.html">Transactions</a>
+        <a href="about.html">About Us</a>
+        <a href="login.html">Login</a>
+        <a href="SignUp.html">Sign Up</a>
+    </nav>
+
+    <main>
+
+        <section class="box">
+            <h2>Sign Up</h2>
+            <p>Fill in the form below to sign up.</p>
+
+            <form id="registerForm">
+
+                <label for="name">Full Name:</label>
+                <input type="text" id="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password"
+                       minlength="6" required>
+
+                <label for="confirmPassword">
+                    Confirm Password:
+                </label>
+                <input type="password" id="confirmPassword"
+                       minlength="6" required>
+
+                <button type="submit">Sign Up</button>
+
+            </form>
+
+            <p>
+                Already have an account?
+                <a href="login.html">Login</a>
+            </p>
+        </section>
+
+        <section class="box">
+            <h2>About Our Project</h2>
+            <p>Click the image to learn more about our project.</p>
+
+            <img
+                src="../images/personal-expense-tracker-info-banner.png"
+                alt="Personal Expense Tracker"
+                class="info-image"
+                id="signupImage"
+                width="400"
+                usemap="#signupMap"
+            >
+
+            <map name="signupMap">
+                <area
+                    id="signupArea"
+                    shape="rect"
+                    coords="0,0,400,250"
+                    href="about.html"
+                    alt="Go to About Us"
+                >
+            </map>
+        </section>
+
+        <p><a href="#top">Back to Top</a></p>
+
+    </main>
+
+    <footer>
+        <p>Personal Expense Tracker | CPIS-358</p>
+    </footer>
+
+    <script>
+        // Sign Up form
+        document.getElementById("registerForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            var password = document.getElementById("password").value;
+            var confirmPassword = document.getElementById("confirmPassword").value;
+
+            if (password !== confirmPassword) {
+                alert("Passwords do not match!");
+            } else {
+                alert("Sign Up is a demo for this project.");
+            }
+        });
+
+        // Image Mapping
+        var signupImage = document.getElementById("signupImage");
+        var signupArea = document.getElementById("signupArea");
+
+        function updateSignupMap() {
+            if (signupImage.naturalWidth === 0) {
+                return;
+            }
+
+            signupArea.coords = "0,0," +
+                signupImage.clientWidth + "," +
+                signupImage.clientHeight;
+        }
+
+        signupImage.addEventListener("load", updateSignupMap);
+        window.addEventListener("resize", updateSignupMap);
+
+        if (signupImage.complete) {
+            updateSignupMap();
+        }
+    </script>
+
+</body>
+</html>
