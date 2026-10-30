@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Expense Tracker Sign </title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #dae2ef;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+        } 
+
+        .signup-card {
+            background-color: white; 
+            padding: 40px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            width: 340px; 
+            text-align: center; 
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        
+        .name-row {
+            display: flex;
+            gap: 10px;
+        }
+
+        .name-row .input-group {
+            flex: 1;
+        }
+
+        .input-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 14px;
+            color: #555;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+
+        .signup-btn {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 16px;
+            margin-top: 10px;
+        }
+
+        .signup-btn:hover {
+            background-color: #218838;
+        }
+
+        .login-link {
+            margin-top: 15px;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .login-link a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="signup-card">
+        <h2>Create Account</h2>
+        
+        <form action="Expense_Tracker.html">
+            
+            
+            <div class="name-row">
+                <div class="input-group">
+                    <label for="firstname">First Name:</label>
+                    <input type="text" id="firstname" placeholder="First name" required>
+                </div>
+
+                <div class="input-group">
+                    <label for="lastname">Last Name:</label>
+                    <input type="text" id="lastname" placeholder="Last name" required>
+                </div>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email Address:</label>
+                <input type="email" id="email" placeholder="Enter email address" required>
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" placeholder="Create password" required>
+            </div>
+
+            <button type="submit" class="signup-btn">Sign Up</button>
+        </form>
+
+        <div class="login-link">
+            Already have an account? <a href="Expense_Tracker_Login.html">Login</a>
+        </div>
+    </div>
+
+</body>
+</html>

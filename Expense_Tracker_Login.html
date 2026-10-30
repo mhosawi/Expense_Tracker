@@ -1,0 +1,92 @@
+<!DOCTYPE html> 
+<html>
+
+<head>
+    <title>Expense Tracker Login</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #dae2ef;
+            margin: 0;
+            padding: 0;
+            justify-content: center;
+            display: flex;
+            align-items: center;
+            height: 100vh;
+        } 
+
+        .login-card{
+            background-color: white; 
+            padding: 50px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+            width: 305px; 
+            text-align: center; 
+        }
+
+        h2 {
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        .input-group{
+            margin-bottom: 15px;
+            text-align: center;
+                
+            
+        }
+        input {
+            width: 75%; 
+            padding: 6px;
+            box-sizing: border-box;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-size: 13px;
+            color: #555;
+        }
+
+        .login-btn{
+            background-color: #28a745;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 100%;
+            }
+
+
+    </style>
+
+</head>
+
+
+
+<body>
+<div class="login-card">
+    <h2>Login</h2>
+    <form action="Expense_Tracker.html">
+        <div class="input-group">
+            <label for="username">Username / Email:</label>
+            <input type="text" placeholder="Username or Email" required>
+        </div>
+        <div class="input-group">
+            <label for="password">Password:</label>
+            <input type="password" placeholder="Password" required>
+        </div>
+        <button type="submit" class="login-btn">Login</button>
+        
+        <!--go to sign up page-->
+        <div style="margin-top: 15px; font-size: 13px; color: #666;">
+            Don't have an account? <a href="Expense_Tracker_signUp.html" style="color: #007bff; text-decoration: none;">Sign Up</a>
+        </div>
+    </form>
+</div>
+
+
+</body>
+
+</html>
