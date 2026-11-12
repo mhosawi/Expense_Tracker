@@ -5,9 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Personal Expense Tracker</title>
-
     <link rel="stylesheet" href="style.css">
 </head>
 
@@ -73,16 +71,17 @@
         </section>
 
         <section class="box">
-            <h2>About Our Project</h2>
 
-            <p>
+            <h2 id="imageTitle">About Our Project</h2>
+
+            <p id="imageText">
                 Click on the image below to learn
                 more about our project.
             </p>
 
             <img
                 src="images/personal-expense-tracker-about-banner.png"
-                alt="Personal Expense Tracker project"
+                alt="Personal Expense Tracker"
                 class="project-image"
                 id="projectImage"
                 width="400"
@@ -100,10 +99,17 @@
             </map>
 
             <p>
+                <button type="button" id="changeButton">
+                    Change Picture
+                </button>
+            </p>
+
+            <p>
                 <a href="pages/about.html" class="button">
                     Learn More
                 </a>
             </p>
+
         </section>
 
         <p>
@@ -116,10 +122,14 @@
         <p>Personal Expense Tracker | CPIS-358</p>
     </footer>
 
-    <!-- Image Mapping JavaScript -->
     <script>
         var image = document.getElementById("projectImage");
         var area = document.getElementById("aboutArea");
+        var title = document.getElementById("imageTitle");
+        var text = document.getElementById("imageText");
+        var button = document.getElementById("changeButton");
+
+        var changed = false;
 
         function updateMap() {
             if (image.naturalWidth === 0) {
@@ -130,6 +140,44 @@
                 image.clientWidth + "," +
                 image.clientHeight;
         }
+
+        function changePicture() {
+
+            if (changed === false) {
+
+                image.src =
+                    "images/personal-expense-tracker-info-banner.png";
+
+                title.textContent = "Track Your Expenses";
+
+                text.textContent =
+                    "Use our website to manage your income and expenses.";
+
+                title.style.color = "#124d3e";
+
+                button.textContent = "Original Picture";
+
+                changed = true;
+
+            } else {
+
+                image.src =
+                    "images/personal-expense-tracker-about-banner.png";
+
+                title.textContent = "About Our Project";
+
+                text.textContent =
+                    "Click on the image below to learn more about our project.";
+
+                title.style.color = "#176b55";
+
+                button.textContent = "Change Picture";
+
+                changed = false;
+            }
+        }
+
+        button.addEventListener("click", changePicture);
 
         image.addEventListener("load", updateMap);
         window.addEventListener("resize", updateMap);
