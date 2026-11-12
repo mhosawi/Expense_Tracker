@@ -1,4 +1,3 @@
-
 var transactions = [];
 
 try {
@@ -16,24 +15,116 @@ function saveData() {
     localStorage.setItem("transactions", JSON.stringify(transactions));
 }
 
-// Add a transaction
-var form = document.getElementById("transactionForm");
+// Sort transactions by date and time added
+function sortTransactions() {
 
+    return transactions.slice().sort(function(a, b) {
+
+        if (a.date === b.date) {
+            return b.id - a.id;
+        }
+
+        return b.date.localeCompare(a.date);
+    });
+}
+
+// Get HTML elements
+var form = document.getElementById("transactionForm");
+var message = document.getElementById("transactionMessage");
+var typeInput = document.getElementById("type");
+var categoryInput = document.getElementById("category");
+
+// Show messages
+function showMessage(text, color) {
+
+    if (message) {
+        message.textContent = text;
+        message.style.color = color;
+    }
+}
+
+// Change categories based on transaction type
+function updateCategories() {
+
+    if (!typeInput || !categoryInput) {
+        return;
+    }
+
+    var type = typeInput.value;
+
+    categoryInput.innerHTML =
+        '<option value="">Select Category</option>';
+
+    var categories;
+
+    if (type === "income") {
+
+        categories = ["Salary", "Other"];
+
+    } else if (type === "expense") {
+
+        categories = [
+            "Food",
+            "Shopping",
+            "Bills",
+            "Transportation",
+            "Other"
+        ];
+
+    } else {
+
+        categories = [];
+    }
+
+    categories.forEach(function(category) {
+
+        var option = document.createElement("option");
+
+        option.value = category;
+        option.textContent = category;
+
+        categoryInput.appendChild(option);
+    });
+}
+
+if (typeInput) {
+    typeInput.addEventListener("change", updateCategories);
+    updateCategories();
+}
+
+// Add a transaction
 if (form) {
+
     form.addEventListener("submit", function(event) {
+
         event.preventDefault();
 
         var date = document.getElementById("date").value;
-        var type = document.getElementById("type").value;
-        var category = document.getElementById("category").value;
-        var amount = Number(document.getElementById("amount").value);
+        var type = typeInput.value;
+        var category = categoryInput.value;
 
-        if (!date || !type || !category || amount <= 0 || !Number.isFinite(amount)) {
-            alert("Please enter valid information.");
+        var amountText =
+            document.getElementById("amount").value;
+
+        var amount = Number(amountText);
+
+        // Form Validation
+        if (!date || !type || !category || amountText === "") {
+
+            showMessage("Please fill in all fields.", "red");
+            return;
+
+        } else if (!Number.isFinite(amount) || amount <= 0) {
+
+            showMessage(
+                "Amount must be greater than zero.",
+                "red"
+            );
             return;
         }
 
         var transaction = {
+
             id: Date.now() + Math.random(),
             date: date,
             type: type,
@@ -42,24 +133,38 @@ if (form) {
         };
 
         transactions.push(transaction);
+
         saveData();
 
         form.reset();
+        updateCategories();
+
+        showAll = false;
         showTransactions();
 
-        alert("Transaction added successfully!");
+        showMessage(
+            "Transaction added successfully!",
+            "green"
+        );
     });
 }
 
 // Delete a transaction
 function deleteTransaction(id) {
+
     if (confirm("Delete this transaction?")) {
+
         transactions = transactions.filter(function(item) {
             return item.id !== id;
         });
 
         saveData();
         showTransactions();
+
+        showMessage(
+            "Transaction deleted successfully!",
+            "green"
+        );
     }
 }
 
@@ -67,6 +172,7 @@ function deleteTransaction(id) {
 var showAll = false;
 
 function showTransactions() {
+
     var table = document.getElementById("transactionList");
 
     if (!table) {
@@ -75,13 +181,19 @@ function showTransactions() {
 
     table.innerHTML = "";
 
-    var sorted = transactions.slice().sort(function(a, b) {
-        return b.date.localeCompare(a.date);
-    });
+    // Newest transactions first
+    var sorted = sortTransactions();
 
-    var visible = showAll ? sorted : sorted.slice(0, 3);
+    var visible;
+
+    if (showAll) {
+        visible = sorted;
+    } else {
+        visible = sorted.slice(0, 3);
+    }
 
     if (visible.length === 0) {
+
         var emptyRow = document.createElement("tr");
         var emptyCell = document.createElement("td");
 
@@ -93,6 +205,7 @@ function showTransactions() {
     }
 
     visible.forEach(function(item) {
+
         var row = document.createElement("tr");
 
         var dateCell = document.createElement("td");
@@ -105,9 +218,11 @@ function showTransactions() {
         typeCell.textContent = item.type;
 
         var amountCell = document.createElement("td");
-        amountCell.textContent = Number(item.amount).toFixed(2) + " SAR";
+        amountCell.textContent =
+            Number(item.amount).toFixed(2) + " SAR";
 
         var actionCell = document.createElement("td");
+
         var deleteButton = document.createElement("button");
 
         deleteButton.type = "button";
@@ -128,20 +243,31 @@ function showTransactions() {
         table.appendChild(row);
     });
 
+    // Transaction count
     var count = document.getElementById("transactionCount");
 
     if (count) {
-        count.textContent = "Total Transactions: " + transactions.length;
+        count.textContent =
+            "Total Transactions: " + transactions.length;
     }
 
+    // View All / Show Less
     var viewButton = document.getElementById("viewAllButton");
 
     if (viewButton) {
+
         viewButton.hidden = transactions.length <= 3;
 
-        viewButton.textContent = showAll
-            ? "Show Less"
-            : "View All Transactions";
+        if (showAll) {
+            viewButton.textContent = "Show Less";
+        } else {
+            viewButton.textContent = "View All Transactions";
+        }
+
+        viewButton.setAttribute(
+            "aria-expanded",
+            String(showAll)
+        );
     }
 }
 
@@ -149,7 +275,9 @@ function showTransactions() {
 var viewButton = document.getElementById("viewAllButton");
 
 if (viewButton) {
+
     viewButton.addEventListener("click", function() {
+
         showAll = !showAll;
         showTransactions();
     });
@@ -157,6 +285,7 @@ if (viewButton) {
 
 // Update Dashboard
 function showDashboard() {
+
     var balance = document.getElementById("balance");
 
     if (!balance) {
@@ -166,12 +295,17 @@ function showDashboard() {
     var income = 0;
     var expenses = 0;
 
+    // Calculate income and expenses
     transactions.forEach(function(item) {
+
         var amount = Number(item.amount);
 
         if (item.type === "income") {
+
             income += amount;
+
         } else if (item.type === "expense") {
+
             expenses += amount;
         }
     });
@@ -185,7 +319,9 @@ function showDashboard() {
     balance.textContent =
         (income - expenses).toFixed(2) + " SAR";
 
-    var recentTable = document.getElementById("recentTransactions");
+    // Recent transactions
+    var recentTable =
+        document.getElementById("recentTransactions");
 
     if (!recentTable) {
         return;
@@ -193,11 +329,11 @@ function showDashboard() {
 
     recentTable.innerHTML = "";
 
-    var recent = transactions.slice().sort(function(a, b) {
-        return b.date.localeCompare(a.date);
-    }).slice(0, 5);
+    // Show latest 5 transactions
+    var recent = sortTransactions().slice(0, 5);
 
     if (recent.length === 0) {
+
         var emptyRow = document.createElement("tr");
         var emptyCell = document.createElement("td");
 
@@ -209,6 +345,7 @@ function showDashboard() {
     }
 
     recent.forEach(function(item) {
+
         var row = document.createElement("tr");
 
         var dateCell = document.createElement("td");
@@ -221,7 +358,8 @@ function showDashboard() {
         typeCell.textContent = item.type;
 
         var amountCell = document.createElement("td");
-        amountCell.textContent = Number(item.amount).toFixed(2) + " SAR";
+        amountCell.textContent =
+            Number(item.amount).toFixed(2) + " SAR";
 
         row.appendChild(dateCell);
         row.appendChild(categoryCell);
@@ -232,6 +370,6 @@ function showDashboard() {
     });
 }
 
-// Run functions
+// Run when the page opens
 showTransactions();
 showDashboard();
