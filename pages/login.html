@@ -9,6 +9,13 @@
     <title>Login - Personal Expense Tracker</title>
 
     <link rel="stylesheet" href="../style.css">
+
+    <style>
+        #loginMessage {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body id="top">
@@ -36,28 +43,31 @@
 
             <p>Enter your information to continue.</p>
 
-            <form id="loginForm">
+            <form id="loginForm" novalidate>
 
                 <label for="email">Email:</label>
                 <input
                     type="email"
                     id="email"
+                    name="email"
+                    autocomplete="username"
                     placeholder="Enter your email"
-                    required
                 >
 
                 <label for="password">Password:</label>
                 <input
                     type="password"
                     id="password"
+                    name="password"
+                    autocomplete="current-password"
                     placeholder="Enter your password"
-                    minlength="6"
-                    required
                 >
 
                 <button type="submit">Login</button>
 
             </form>
+
+            <p id="loginMessage" role="status"></p>
 
             <p>
                 Don't have an account?
@@ -110,18 +120,61 @@
     <!-- Embedded JavaScript -->
     <script>
 
-        // Login form
-        document.getElementById("loginForm").addEventListener("submit", function(event) {
+        var loginForm = document.getElementById("loginForm");
+        var email = document.getElementById("email");
+        var password = document.getElementById("password");
+        var message = document.getElementById("loginMessage");
+
+        // Login validation
+        function validateLogin(event) {
+
             event.preventDefault();
 
-            alert("Login is a demo for this project.");
-        });
+            var emailValue = email.value.trim();
+            var passwordValue = password.value;
+
+            if (emailValue === "" || passwordValue === "") {
+
+                message.textContent = "Please fill in all fields.";
+                message.style.color = "red";
+
+            } else if (!emailValue.includes("@") ||
+                       !emailValue.includes(".")) {
+
+                message.textContent = "Please enter a valid email.";
+                message.style.color = "red";
+
+            } else if (passwordValue.length < 6) {
+
+                message.textContent =
+                    "Password must be at least 6 characters.";
+                message.style.color = "red";
+
+            } else {
+
+                message.textContent =
+                    "Your information is valid. Login is a demo.";
+                message.style.color = "green";
+
+            }
+        }
+
+        loginForm.addEventListener("submit", validateLogin);
+
+        // Clear message when user types
+        function clearMessage() {
+            message.textContent = "";
+        }
+
+        email.addEventListener("input", clearMessage);
+        password.addEventListener("input", clearMessage);
 
         // Image Mapping
         var loginImage = document.getElementById("loginImage");
         var loginArea = document.getElementById("loginArea");
 
         function updateLoginMap() {
+
             if (loginImage.naturalWidth === 0) {
                 return;
             }

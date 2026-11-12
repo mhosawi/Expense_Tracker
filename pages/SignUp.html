@@ -5,8 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>Sign Up - Personal Expense Tracker</title>
+
     <link rel="stylesheet" href="../style.css">
+
+    <style>
+        #signupMessage {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body id="top">
@@ -27,41 +36,75 @@
 
     <main>
 
+        <!-- Sign Up Form -->
         <section class="box">
+
             <h2>Sign Up</h2>
             <p>Fill in the form below to sign up.</p>
 
-            <form id="registerForm">
+            <form id="registerForm" novalidate>
 
                 <label for="name">Full Name:</label>
-                <input type="text" id="name" required>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    autocomplete="name"
+                    placeholder="Enter your full name"
+                >
 
                 <label for="email">Email:</label>
-                <input type="email" id="email" required>
+                <input
+                    type="email"
+                    id="email"
+                    name="email"
+                    autocomplete="email"
+                    placeholder="Enter your email"
+                >
 
                 <label for="password">Password:</label>
-                <input type="password" id="password"
-                       minlength="6" required>
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    autocomplete="new-password"
+                    placeholder="Create a password"
+                >
 
                 <label for="confirmPassword">
                     Confirm Password:
                 </label>
-                <input type="password" id="confirmPassword"
-                       minlength="6" required>
+
+                <input
+                    type="password"
+                    id="confirmPassword"
+                    name="confirmPassword"
+                    autocomplete="new-password"
+                    placeholder="Confirm your password"
+                >
 
                 <button type="submit">Sign Up</button>
 
             </form>
 
+            <p id="signupMessage" role="status"></p>
+
             <p>
                 Already have an account?
                 <a href="login.html">Login</a>
             </p>
+
         </section>
 
+        <!-- Project Image -->
         <section class="box">
+
             <h2>About Our Project</h2>
-            <p>Click the image to learn more about our project.</p>
+
+            <p>
+                Click on the image to learn more
+                about our project.
+            </p>
 
             <img
                 src="../images/personal-expense-tracker-info-banner.png"
@@ -81,9 +124,12 @@
                     alt="Go to About Us"
                 >
             </map>
+
         </section>
 
-        <p><a href="#top">Back to Top</a></p>
+        <p>
+            <a href="#top">Back to Top</a>
+        </p>
 
     </main>
 
@@ -91,26 +137,92 @@
         <p>Personal Expense Tracker | CPIS-358</p>
     </footer>
 
+    <!-- Embedded JavaScript -->
     <script>
-        // Sign Up form
-        document.getElementById("registerForm").addEventListener("submit", function(event) {
+
+        var registerForm = document.getElementById("registerForm");
+
+        var nameInput = document.getElementById("name");
+        var emailInput = document.getElementById("email");
+        var passwordInput = document.getElementById("password");
+        var confirmInput = document.getElementById("confirmPassword");
+
+        var signupMessage = document.getElementById("signupMessage");
+
+        // Validate Sign Up form
+        function validateSignup(event) {
+
             event.preventDefault();
 
-            var password = document.getElementById("password").value;
-            var confirmPassword = document.getElementById("confirmPassword").value;
+            var name = nameInput.value.trim();
+            var email = emailInput.value.trim();
+            var password = passwordInput.value;
+            var confirmPassword = confirmInput.value;
 
-            if (password !== confirmPassword) {
-                alert("Passwords do not match!");
+            if (name === "" || email === "" ||
+                password === "" || confirmPassword === "") {
+
+                signupMessage.textContent =
+                    "Please fill in all fields.";
+
+                signupMessage.style.color = "red";
+
+            } else if (name.length < 3) {
+
+                signupMessage.textContent =
+                    "Name must be at least 3 characters.";
+
+                signupMessage.style.color = "red";
+
+            } else if (!email.includes("@") ||
+                       !email.includes(".")) {
+
+                signupMessage.textContent =
+                    "Please enter a valid email.";
+
+                signupMessage.style.color = "red";
+
+            } else if (password.length < 6) {
+
+                signupMessage.textContent =
+                    "Password must be at least 6 characters.";
+
+                signupMessage.style.color = "red";
+
+            } else if (password !== confirmPassword) {
+
+                signupMessage.textContent =
+                    "Passwords do not match!";
+
+                signupMessage.style.color = "red";
+
             } else {
-                alert("Sign Up is a demo for this project.");
+
+                signupMessage.textContent =
+                    "Your information is valid. Sign Up is a demo.";
+
+                signupMessage.style.color = "green";
             }
-        });
+        }
+
+        registerForm.addEventListener("submit", validateSignup);
+
+        // Clear message when typing
+        function clearSignupMessage() {
+            signupMessage.textContent = "";
+        }
+
+        nameInput.addEventListener("input", clearSignupMessage);
+        emailInput.addEventListener("input", clearSignupMessage);
+        passwordInput.addEventListener("input", clearSignupMessage);
+        confirmInput.addEventListener("input", clearSignupMessage);
 
         // Image Mapping
         var signupImage = document.getElementById("signupImage");
         var signupArea = document.getElementById("signupArea");
 
         function updateSignupMap() {
+
             if (signupImage.naturalWidth === 0) {
                 return;
             }
@@ -126,6 +238,7 @@
         if (signupImage.complete) {
             updateSignupMap();
         }
+
     </script>
 
 </body>
